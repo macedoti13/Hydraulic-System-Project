@@ -100,7 +100,7 @@ def forecast_next_24_hours_output_flow_rate(
         # Generate synthetic input_flow_rate for the new timestamp
         input_flow_features = last_24_hours_data['input_flow_rate'].tail(576).values.reshape(1, -1)
         next_input_flow = input_flow_model.predict(input_flow_features)[0]
-        # toss a coin. if heads, increase next input flow by 5%, else decrease by 5% using random
+
         if random.choice([True, False]):
             next_input_flow = next_input_flow * 1.05
         else:
