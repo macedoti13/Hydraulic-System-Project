@@ -1,5 +1,9 @@
-pandas 
+pandas
 numpy
 scikit-learn
+plotly
+matplotlib
+seaborn
 xgboost
 pyarrow
+nbformat>=4.2.0
