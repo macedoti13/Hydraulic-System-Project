@@ -11,13 +11,20 @@ def filter_df_for_forecasting_next_24_hours(
     ) -> pd.DataFrame:
     
     df = input_df.copy()
+    filtered_df = df[(df.year == year) & (df.month == month) & (df.day == day)]
+
     if hour is not None:
+        filtered_df = filtered_df[filtered_df.hour == hour]
         if minute is not None:
-            filtered_df = df[(df.year == year) & (df.month == month) & (df.day == day) & (df.hour == hour) & (df.minute == minute)]
-        else:
-            filtered_df = df[(df.year == year) & (df.month == month) & (df.day == day) & (df.hour == hour)]
-    else:
+            filtered_df = filtered_df[filtered_df.minute == minute]
+
+    # If the resulting DataFrame is empty, try less specific conditions
+    if filtered_df.empty:
         filtered_df = df[(df.year == year) & (df.month == month) & (df.day == day)]
+        if hour is not None:
+            filtered_df = filtered_df[filtered_df.hour == hour]
+            if filtered_df.empty:
+                filtered_df = df[(df.year == year) & (df.month == month) & (df.day == day)]
     
     if filtered_df.empty:
         raise ValueError("No matching date/time found in the DataFrame.")
