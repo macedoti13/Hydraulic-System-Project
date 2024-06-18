@@ -1,18 +1,20 @@
 from flask import Flask, render_template, request
 import pandas as pd
+import pickle
 import sys
 import os
 
 # Construct the absolute path to the dataset
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# generate datasets paths 
-water_consumption_path = os.path.join(BASE_DIR, 'data', 'curated_datasets', 'water_consumption_curated.parquet')
-forecasting_dataset_path = os.path.join(BASE_DIR, 'data', 'curated_datasets', 'forecasting_dataset.parquet')
-
 # load datasets
-water_consumption = pd.read_parquet(water_consumption_path)
-forecasting_dataset = pd.read_parquet(forecasting_dataset_path)
+water_consumption = pd.read_parquet(os.path.join(BASE_DIR, 'data', 'curated_datasets', 'water_consumption_curated.parquet'))
+forecasting_dataset = pd.read_parquet(os.path.join(BASE_DIR, 'data', 'curated_datasets', 'forecasting_dataset.parquet'))
+
+# load forecasters
+output_flow_forecaster = pickle.load(open(os.path.join(BASE_DIR, 'models', 'forecaster.pkl'), 'rb'))
+output_flow_forecaster_with_weather = pickle.load(open(os.path.join(BASE_DIR, 'models', 'forecaster_with_weather.pkl'), 'rb'))
+input_flow_forecaster = pickle.load(open(os.path.join(BASE_DIR, 'models', 'input_flow_forecaster.pkl'), 'rb'))
 
 # import from the utils module here
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -35,12 +37,27 @@ def static_plots():
 @app.route('/forecasting-plots', methods=['GET', 'POST'])
 def foresting_plots():
     if request.method == 'POST':
-        year = request.form['year']
-        month = request.form['month']
-        day = request.form['day']
-        hour = request.form['hour']
-        minute = request.form['minute']
-            
+        year = int(request.form['year'])
+        month = int(request.form['month'])
+        day = int(request.form['day'])
+        hour = int(request.form['hour'])
+        minute = int(request.form['minute'])
+
+  # create all dataframes that require the user input
+        output_flow_24_hour_forecast_df = forecast_next_24_hours_output_flow_rate(
+            water_consumption, output_flow_forecaster, input_flow_forecaster, year, month, day, hour, minute, False
+        )
+        
+        output_flow_24_hour_forecast_with_weather_df = forecast_next_24_hours_output_flow_rate(
+            water_consumption, output_flow_forecaster_with_weather, input_flow_forecaster, year, month, day, hour, minute, True
+        )
+        
+        emptying_simulation_df = simulate_emptying(
+            water_consumption, output_flow_forecaster, input_flow_forecaster, year, month, day, hour, minute, False
+        )
+        
+        # TO DO: create dataframe for pump status optimization here (not yet implemented in the utils module)
+
         return render_template('forecasting_plots.html')
     
     return render_template('forecasting_plots.html')
