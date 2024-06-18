@@ -6,15 +6,18 @@ import os
 # Construct the absolute path to the dataset
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# import datasets
+# generate datasets paths 
 water_consumption_path = os.path.join(BASE_DIR, 'data', 'curated_datasets', 'water_consumption_curated.parquet')
 forecasting_dataset_paht = os.path.join(BASE_DIR, 'data', 'curated_datasets', 'forecasting_dataset.parquet')
+
+# load datasets
 water_consumption = pd.read_parquet(water_consumption_path)
 forecasting_dataset = pd.read_parquet(forecasting_dataset_paht)
 
 # import from the utils module here
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
+# generate app
 app = Flask(__name__)
 
 # Route for the homepage
@@ -42,7 +45,7 @@ def model_performance():
 def submit():
     timestamp = request.form['timestamp']
     # Add your logic to handle the timestamp and generate plots here
-    return render_template('user_input.html', timestamp=timestamp)
+    return render_template('forecasting_plots.html', timestamp=timestamp)
 
 def main():
     app.run(host='0.0.0.0', port=3000, debug=True)
