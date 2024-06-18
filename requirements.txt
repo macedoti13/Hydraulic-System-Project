@@ -7,3 +7,8 @@ seaborn
 xgboost
 pyarrow
 nbformat>=4.2.0
+plotly
+dash
+dash-bootstrap-components
+flask
+sqlalchemy
