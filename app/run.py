@@ -3,18 +3,19 @@ import pandas as pd
 import sys
 import os
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from utils.scripts.functions.main_functions import forecast_next_24_hours_output_flow_rate
-
-app = Flask(__name__)
-
 # Construct the absolute path to the dataset
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-dataset_path = os.path.join(BASE_DIR, 'data', 'curated_datasets', 'water_consumption_curated.parquet')
 
+# import datasets
+water_consumption_path = os.path.join(BASE_DIR, 'data', 'curated_datasets', 'water_consumption_curated.parquet')
+forecasting_dataset_paht = os.path.join(BASE_DIR, 'data', 'curated_datasets', 'forecasting_dataset.parquet')
+water_consumption = pd.read_parquet(water_consumption_path)
+forecasting_dataset = pd.read_parquet(forecasting_dataset_paht)
 
-# Load datasets
-water_consumption = pd.read_parquet(dataset_path)
+# import from the utils module here
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+app = Flask(__name__)
 
 # Route for the homepage
 @app.route('/')
