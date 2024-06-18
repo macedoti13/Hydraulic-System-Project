@@ -43,7 +43,7 @@ def foresting_plots():
         hour = int(request.form['hour'])
         minute = int(request.form['minute'])
 
-  # create all dataframes that require the user input
+        # create all dataframes that require the user input
         output_flow_24_hour_forecast_df = forecast_next_24_hours_output_flow_rate(
             water_consumption, output_flow_forecaster, input_flow_forecaster, year, month, day, hour, minute, False
         )
@@ -58,6 +58,8 @@ def foresting_plots():
         
         # TO DO: create dataframe for pump status optimization here (not yet implemented in the utils module)
 
+        # create the plots that will be displayed on the forecasting plots page here
+        
         return render_template('forecasting_plots.html')
     
     return render_template('forecasting_plots.html')
@@ -66,13 +68,6 @@ def foresting_plots():
 @app.route('/model-performance')
 def model_performance():
     return render_template('model_performance.html')
-
-# Route to handle form submission
-@app.route('/submit', methods=['POST'])
-def submit():
-    timestamp = request.form['timestamp']
-    # Add your logic to handle the timestamp and generate plots here
-    return render_template('forecasting_plots.html', timestamp=timestamp)
 
 def main():
     app.run(host='0.0.0.0', port=3000, debug=True)
