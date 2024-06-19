@@ -6,6 +6,19 @@
         h1 {
             text-align: center;
         }
+        h2 {
+            text-align: center;
+        }
+        .plot-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 20px;
+            padding: 20px;
+        }
+        .plot-title {
+            text-align: center;
+            margin-bottom: 10px;
+        }
     </style>
     <title>Static Plots</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -61,7 +74,18 @@
     </nav>
     <div class="container">
         <h1>Static Plots</h1>
-        <!-- Add your static plot code here -->
+        <div class="plot-container">
+            <div>
+                <div class="plot-title">Column 1 Title</div>
+                <div>{{ plot_html | safe }}</div>
+                <div>{{ plot_2_html | safe }}</div>
+            </div>
+            <div>
+                <div class="plot-title">Column 2 Title</div>
+                <div>{{ plot_3_html | safe }}</div>
+                <div>{{ plot_4_html | safe }}</div>
+            </div>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -80,5 +104,6 @@
             });
         });
     </script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </body>
 </html>
