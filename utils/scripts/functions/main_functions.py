@@ -5,7 +5,7 @@ from pathlib import Path
 current_dir = Path(__file__).resolve().parent
 sys.path.append(str(current_dir))
 
-from utils.scripts.functions.support_functions import filter_df_for_forecasting_next_24_hours, create_features_vectorized, weather_features
+from utils.scripts.functions.support_functions import filter_df_for_forecasting_next_24_hours, create_features_vectorized, weather_features, seconds_to_hms
 from xgboost import XGBRegressor
 from datetime import timedelta
 from typing import Optional
@@ -76,6 +76,8 @@ def forecast_next_24_hours_output_flow_rate(
     
     # Filter dataset with the last 24 hours data from the specified date/time
     last_24_hours_data = filter_df_for_forecasting_next_24_hours(df, year, month, day, hour, minute)
+    last_24_hours_data['forecasted'] = False
+    original_last_24_hours_data = last_24_hours_data.copy()
     
     if len(last_24_hours_data) != 577:
         raise ValueError("The resulting DataFrame does not contain 576 rows.")
@@ -175,12 +177,13 @@ def forecast_next_24_hours_output_flow_rate(
             'wind_direction_deg': last_24_hours_data.iloc[-1]['wind_direction_deg'],
             'max_wind_gust_m_s': last_24_hours_data.iloc[-1]['max_wind_gust_m_s'],
             'wind_speed_m_s': last_24_hours_data.iloc[-1]['wind_speed_m_s'],
+            'forecasted': True
         }
         new_row_df = pd.DataFrame(new_row, index=[0])
         
         # Append the new row to the last_24_hours_data dataset
-        #last_24_hours_data = last_24_hours_data.append(new_row, ignore_index=True)
         last_24_hours_data = pd.concat([last_24_hours_data, new_row_df], ignore_index=True)
+        original_last_24_hours_data = pd.concat([original_last_24_hours_data, new_row_df], ignore_index=True)
         
         # Keep only the last 576 rows
         last_24_hours_data = last_24_hours_data.iloc[1:]
@@ -189,7 +192,7 @@ def forecast_next_24_hours_output_flow_rate(
     # Create a DataFrame with forecasted values for the next 24 hours
     forecasted_df = pd.DataFrame(forecasted_values).round(2)
     
-    return forecasted_df
+    return forecasted_df, original_last_24_hours_data[['hour', 'output_flow_rate', 'forecasted']].round(2)
 
 def simulate_emptying(
     input_df: pd.DataFrame,  # receives water_consumption_curated.parquet dataset
@@ -204,7 +207,7 @@ def simulate_emptying(
 ) -> pd.DataFrame:
     
     df = input_df.copy()
-    next_24_hours_forecasting = forecast_next_24_hours_output_flow_rate(df, forecaster, input_flow_model, year, month, day, hour, minute, include_weather_features)
+    next_24_hours_forecasting, _ = forecast_next_24_hours_output_flow_rate(df, forecaster, input_flow_model, year, month, day, hour, minute, include_weather_features)
     reservoir_level = next_24_hours_forecasting.reservoir_level_liters.values[0]
     row = next_24_hours_forecasting.iloc[0, :]
     print(f"Initial reservoir level: {reservoir_level}")
@@ -228,10 +231,10 @@ def simulate_emptying(
                 simulations.append(simulation_df)
                 if len(simulations) > 0:
                     simulation_df = pd.concat(simulations, ignore_index=True)
-                return simulation_df
+                return simulation_df, seconds_to_hms(time_elapsed)
         
         row = simulation_df.iloc[-1, :]
         old_simulation_df = simulation_df.copy()
         simulations.append(old_simulation_df)
         
-    return simulation_df
+    return simulation_df, seconds_to_hms(time_elapsed)

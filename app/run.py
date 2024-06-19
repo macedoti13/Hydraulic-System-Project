@@ -22,6 +22,7 @@ input_flow_forecaster = pickle.load(open(os.path.join(BASE_DIR, 'models', 'input
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from utils.scripts.functions.main_functions import simulate_emptying, forecast_next_24_hours_output_flow_rate
 from app.plots_functions.static_plots import generate_question_2_plot_1, generate_question_2_plot_2, generate_question_3_plot_1, generate_question_3_plot_2, generate_question_6_plots
+from app.plots_functions.forecasting_plots import create_question_4_plot
 
 
 # generate app
@@ -55,23 +56,17 @@ def forecasting_plots():
         minute = int(request.form['minute'])
 
         # create all dataframes that require the user input
-        output_flow_24_hour_forecast_question_2_dataset = forecast_next_24_hours_output_flow_rate(
-            water_consumption, output_flow_forecaster, input_flow_forecaster, year, month, day, hour, minute, False
-        )
-        
-        output_flow_24_hour_forecast_with_weather_question_2_dataset = forecast_next_24_hours_output_flow_rate(
-            water_consumption, output_flow_forecaster_with_weather, input_flow_forecaster, year, month, day, hour, minute, True
-        )
-        
-        emptying_simulation_question_2_dataset = simulate_emptying(
-            water_consumption, output_flow_forecaster, input_flow_forecaster, year, month, day, hour, minute, False
-        )
+        _, output_flow_24_hour_forecast_question_2_dataset = forecast_next_24_hours_output_flow_rate(water_consumption, output_flow_forecaster, input_flow_forecaster, year, month, day, hour, minute, False)
+        _, output_flow_24_hour_forecast_with_weather_question_2_dataset = forecast_next_24_hours_output_flow_rate(water_consumption, output_flow_forecaster_with_weather, input_flow_forecaster, year, month, day, hour, minute, True)
+        emptying_simulation_question_2_dataset, time_until_emptying = simulate_emptying(water_consumption, output_flow_forecaster, input_flow_forecaster, year, month, day, hour, minute, False)
         
         # TO DO: create dataframe for pump status optimization here (not yet implemented in the utils module)
 
         # create the plots that will be displayed on the forecasting plots page here
+        question_4_plot = create_question_4_plot(output_flow_24_hour_forecast_question_2_dataset[['hour', 'output_flow_rate', 'forecasted']])
+        question_7_plot = create_question_4_plot(output_flow_24_hour_forecast_with_weather_question_2_dataset[['hour', 'output_flow_rate', 'forecasted']])
         
-        return render_template('forecasting_plots.html')
+        return render_template('forecasting_plots.html', plot_q4=question_4_plot, plot_q7=question_7_plot)
     
     return render_template('forecasting_plots.html')
 

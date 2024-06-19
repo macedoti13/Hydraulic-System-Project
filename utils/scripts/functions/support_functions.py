@@ -126,3 +126,9 @@ weather_features = [
         'last_min_humidity_last_hour_percentage', 'last_relative_humidity_percentage', 'last_wind_direction_deg',
         'last_max_wind_gust_m_s', 'last_wind_speed_m_s'
     ]
+
+def seconds_to_hms(seconds):
+    hours = seconds // 3600
+    minutes = (seconds % 3600) // 60
+    seconds = seconds % 60
+    return hours, minutes, seconds
