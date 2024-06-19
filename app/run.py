@@ -42,7 +42,7 @@ def static_plots():
     question_4_plot = generate_question_3_plot_2(question_3_dataset)  
     question_6_plot_1, question_6_plot_2, question_6_plot_3 = generate_question_6_plots(water_consumption.iloc[10000:25000])
 
-    return render_template('static_plots.html', plot_html=question_1_plot, plot_2_html=question_2_plot, plot_3_html=question_3_plot, plot_4_html=question_4_plot)
+    return render_template('static_plots.html', plot_html=question_1_plot, plot_2_html=question_2_plot, plot_3_html=question_3_plot, plot_4_html=question_4_plot, plot_5_html=question_6_plot_1, plot_6_html=question_6_plot_2, plot_7_html=question_6_plot_3)
 
 # Route for the forecasting plots page
 @app.route('/forecasting-plots', methods=['GET', 'POST'])

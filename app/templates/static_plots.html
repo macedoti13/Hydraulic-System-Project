@@ -19,6 +19,16 @@
             text-align: center;
             margin-bottom: 10px;
         }
+        .plot-row {
+            grid-column: span 2;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .plot-full-width {
+            grid-column: span 2;
+            margin-bottom: 20px;
+        }
     </style>
     <title>Static Plots</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -85,6 +95,9 @@
                 <div>{{ plot_3_html | safe }}</div>
                 <div>{{ plot_4_html | safe }}</div>
             </div>
+            <div class="plot-full-width">{{ plot_5_html | safe }}</div>
+            <div class="plot-full-width">{{ plot_6_html | safe }}</div>
+            <div class="plot-full-width">{{ plot_7_html | safe }}</div>
         </div>
     </div>
 
