@@ -38,8 +38,8 @@ def static_plots():
     # Generate the plots that will be displayed on the static plots page
     question_1_plot = generate_question_2_plot_1(question_2_dataset)
     question_2_plot = generate_question_2_plot_2(question_2_dataset)
-    question_3_plot = generate_question_3_plot_1(question_3_dataset)  # Add your function to generate plot 3
-    question_4_plot = generate_question_2_plot_2(question_2_dataset)  # Add your function to generate plot 4
+    question_3_plot = generate_question_3_plot_1(question_3_dataset)  
+    question_4_plot = generate_question_3_plot_2(question_3_dataset)  
 
     return render_template('static_plots.html', plot_html=question_1_plot, plot_2_html=question_2_plot, plot_3_html=question_3_plot, plot_4_html=question_4_plot)
 

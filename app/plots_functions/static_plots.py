@@ -85,4 +85,14 @@ def generate_question_3_plot_1(question_3_dataset):
 
 
 def generate_question_3_plot_2(question_3_dataset):
-    pass
+    question_3_dataset["average_time_used_peak_hours_minutes"] = question_3_dataset["average_time_used_peak_hours"].apply(convert_to_minutes)
+    question_3_dataset["average_time_used_offpeak_hours_minutes"] = question_3_dataset["average_time_used_offpeak_hours"].apply(convert_to_minutes)
+
+    fig = go.Figure(data=[
+        go.Bar(name='Horário de Ponta', x=question_3_dataset['pump'], y=question_3_dataset['average_time_used_peak_hours_minutes'], text=question_3_dataset['average_time_used_peak_hours'], marker_color='#FF5733'),
+        go.Bar(name='Fora de Ponta', x=question_3_dataset['pump'], y=question_3_dataset['average_time_used_offpeak_hours_minutes'], text=question_3_dataset['average_time_used_offpeak_hours'], marker_color='#33C4FF', base=question_3_dataset['average_time_used_peak_hours_minutes'])
+    ])
+
+    fig.update_layout(title='Tempo Médio de Uso das Bombas em Horário de Ponta e Fora de Ponta', xaxis_title='Bombas', yaxis_title='Tempo Médio de Uso (minutos)', barmode='stack', yaxis=dict(tickvals=[0, 60, 120, 180, 240, 300, 360, 420, 480], ticktext=['0', '1h', '2h', '3h', '4h', '5h', '6h', '7h', '8h']))
+    plot_html = fig.to_html(full_html=False)
+    return plot_html
