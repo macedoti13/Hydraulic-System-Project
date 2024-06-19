@@ -3,7 +3,6 @@ import pandas as pd
 import pickle
 import sys
 import os
-import plotly.graph_objects as go
 
 # Construct the absolute path to the dataset
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
