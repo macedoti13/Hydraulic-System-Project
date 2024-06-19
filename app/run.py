@@ -11,6 +11,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 water_consumption = pd.read_parquet(os.path.join(BASE_DIR, 'data', 'curated_datasets', 'water_consumption_curated.parquet'))
 forecasting_dataset = pd.read_parquet(os.path.join(BASE_DIR, 'data', 'curated_datasets', 'forecasting_dataset.parquet'))
 question_2_dataset = pd.read_parquet(os.path.join(BASE_DIR, 'data', 'questions_datasets', 'question_2_dataset.parquet'))
+question_3_dataset = pd.read_parquet(os.path.join(BASE_DIR, 'data', 'questions_datasets', 'question_3_dataset.parquet'))
 
 # load forecasters
 output_flow_forecaster = pickle.load(open(os.path.join(BASE_DIR, 'models', 'forecaster.pkl'), 'rb'))
@@ -37,7 +38,7 @@ def static_plots():
     # Generate the plots that will be displayed on the static plots page
     question_1_plot = generate_question_2_plot_1(question_2_dataset)
     question_2_plot = generate_question_2_plot_2(question_2_dataset)
-    question_3_plot = generate_question_2_plot_2(question_2_dataset)  # Add your function to generate plot 3
+    question_3_plot = generate_question_3_plot_1(question_3_dataset)  # Add your function to generate plot 3
     question_4_plot = generate_question_2_plot_2(question_2_dataset)  # Add your function to generate plot 4
 
     return render_template('static_plots.html', plot_html=question_1_plot, plot_2_html=question_2_plot, plot_3_html=question_3_plot, plot_4_html=question_4_plot)
