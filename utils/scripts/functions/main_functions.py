@@ -218,6 +218,9 @@ def simulate_emptying(
         simulation_df = pd.DataFrame([row] * 576).reset_index(drop=True)
         simulation_df['timestamp'] = [row['timestamp'] + timedelta(seconds=i * 150) for i in range(576)]
         simulation_df['output_flow_rate'] = next_24_hours_forecasting['output_flow_rate'].values[1:]
+        simulation_df['day'] = simulation_df['timestamp'].dt.day
+        simulation_df['hour'] = simulation_df['timestamp'].dt.hour
+        simulation_df['minute'] = simulation_df['timestamp'].dt.minute
         for i, sim_row in simulation_df.iterrows():
             if i == 0:
                 continue
@@ -237,4 +240,4 @@ def simulate_emptying(
         old_simulation_df = simulation_df.copy()
         simulations.append(old_simulation_df)
         
-    return simulation_df, seconds_to_hms(time_elapsed)
+    return simulation_df.round(2), seconds_to_hms(time_elapsed)

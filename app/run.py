@@ -22,7 +22,7 @@ input_flow_forecaster = pickle.load(open(os.path.join(BASE_DIR, 'models', 'input
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from utils.scripts.functions.main_functions import simulate_emptying, forecast_next_24_hours_output_flow_rate
 from app.plots_functions.static_plots import generate_question_2_plot_1, generate_question_2_plot_2, generate_question_3_plot_1, generate_question_3_plot_2, generate_question_6_plots
-from app.plots_functions.forecasting_plots import create_question_4_plot
+from app.plots_functions.forecasting_plots import create_question_4_plot, create_question_5_plot
 
 
 # generate app
@@ -65,8 +65,9 @@ def forecasting_plots():
         # create the plots that will be displayed on the forecasting plots page here
         question_4_plot = create_question_4_plot(output_flow_24_hour_forecast_question_2_dataset[['hour', 'output_flow_rate', 'forecasted']])
         question_7_plot = create_question_4_plot(output_flow_24_hour_forecast_with_weather_question_2_dataset[['hour', 'output_flow_rate', 'forecasted']])
+        question_5_plot = create_question_5_plot(emptying_simulation_question_2_dataset)
         
-        return render_template('forecasting_plots.html', plot_q4=question_4_plot, plot_q7=question_7_plot)
+        return render_template('forecasting_plots.html', plot_q4=question_4_plot, plot_q7=question_7_plot, plot_q5=question_5_plot)
     
     return render_template('forecasting_plots.html')
 

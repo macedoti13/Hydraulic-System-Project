@@ -23,3 +23,12 @@ def create_question_4_plot(df):
     fig.update_traces(marker=dict(symbol='circle'))
     plot_html = fig.to_html(full_html=False)
     return plot_html
+
+
+def create_question_5_plot(df):
+    df['time'] = pd.to_datetime(df[['day', 'hour', 'minute']].astype(str).agg('-'.join, axis=1), format='%d-%H-%M')
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=df['time'],y=df['reservoir_level_liters'],mode='lines+markers',name='Reservoir Level',line=dict(color='blue')))
+    fig.update_layout(title={'text': 'Nivel do Reservatorio caindo com o tempo', 'x': 0.5, 'xanchor': 'center'},xaxis_title='Horarion',yaxis_title='Litros no Reservatorio',legend_title='Type')
+    plot_html = fig.to_html(full_html=False)
+    return plot_html
