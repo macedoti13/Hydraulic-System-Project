@@ -21,7 +21,7 @@ input_flow_forecaster = pickle.load(open(os.path.join(BASE_DIR, 'models', 'input
 # import from the utils module here
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from utils.scripts.functions.main_functions import simulate_emptying, forecast_next_24_hours_output_flow_rate
-from app.plots_functions.static_plots import generate_question_2_plot_1, generate_question_2_plot_2, generate_question_3_plot_1, generate_question_3_plot_2
+from app.plots_functions.static_plots import generate_question_2_plot_1, generate_question_2_plot_2, generate_question_3_plot_1, generate_question_3_plot_2, generate_question_6_plots
 
 
 # generate app
@@ -40,6 +40,7 @@ def static_plots():
     question_2_plot = generate_question_2_plot_2(question_2_dataset)
     question_3_plot = generate_question_3_plot_1(question_3_dataset)  
     question_4_plot = generate_question_3_plot_2(question_3_dataset)  
+    question_6_plot_1, question_6_plot_2, question_6_plot_3 = generate_question_6_plots(water_consumption.iloc[10000:25000])
 
     return render_template('static_plots.html', plot_html=question_1_plot, plot_2_html=question_2_plot, plot_3_html=question_3_plot, plot_4_html=question_4_plot)
 
