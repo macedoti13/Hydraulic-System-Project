@@ -2,37 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <style>
-        h1 {
-            text-align: center;
-        }
-        h2 {
-            text-align: center;
-        }
-        .plot-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-gap: 20px;
-            padding: 20px;
-        }
-        .plot-title {
-            text-align: center;
-            margin-bottom: 10px;
-        }
-        .plot-row {
-            grid-column: span 2;
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-        .plot-full-width {
-            grid-column: span 2;
-            margin-bottom: 20px;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Static Plots</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
+        body {
+            background-color: #e0f7fa;
+            font-family: 'Roboto', sans-serif;
+        }
+        .navbar {
+            background-color: #006064;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
         .navbar-nav {
             display: flex;
             justify-content: center;
@@ -44,24 +26,66 @@
         .nav-link {
             display: block;
             padding: 10px 20px;
-            background-color: lightgray;
+            background-color: #00838f;
+            color: white;
             border-radius: 20px;
             transition: all 0.3s ease;
             font-size: 18px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         .nav-link.active {
-            background-color: #007bff;
+            background-color: #004d40;
             color: white !important;
             font-size: 18px;
             padding: 10px 30px;
         }
         .nav-link:hover {
             text-decoration: none;
+            background-color: #004d40;
+            color: white !important;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #004d40;
+            margin-top: 20px;
+        }
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+        }
+        .plot-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 20px;
+            padding: 20px;
+        }
+        .plot-title {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+        .plot-full-width {
+            grid-column: span 2;
+            margin-bottom: 20px;
+        }
+        .plot {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .container {
+            animation: fadeIn 2s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -85,38 +109,36 @@
     <div class="container">
         <h1>Static Plots</h1>
         <div class="plot-container">
-            <div>
+            <div class="plot">
                 <div class="plot-title">Column 1 Title</div>
                 <div>{{ plot_html | safe }}</div>
                 <div>{{ plot_2_html | safe }}</div>
             </div>
-            <div>
+            <div class="plot">
                 <div class="plot-title">Column 2 Title</div>
                 <div>{{ plot_3_html | safe }}</div>
                 <div>{{ plot_4_html | safe }}</div>
             </div>
-            <div class="plot-full-width">{{ plot_5_html | safe }}</div>
-            <div class="plot-full-width">{{ plot_6_html | safe }}</div>
-            <div class="plot-full-width">{{ plot_7_html | safe }}</div>
+            <div class="plot plot-full-width">{{ plot_5_html | safe }}</div>
+            <div class="plot plot-full-width">{{ plot_6_html | safe }}</div>
+            <div class="plot plot-full-width">{{ plot_7_html | safe }}</div>
         </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script>
         $(document).ready(function() {
-            // Get current URL path and assign 'active' class to the corresponding nav link
             var pathname = window.location.pathname;
             $('.navbar-nav > li > a[href="'+pathname+'"]').addClass('active');
 
-            // Handle click event to animate the active tab
             $('.nav-link').click(function() {
                 $('.nav-link').removeClass('active');
                 $(this).addClass('active');
             });
         });
     </script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </body>
 </html>
