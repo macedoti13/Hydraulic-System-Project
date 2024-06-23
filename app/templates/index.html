@@ -1,15 +1,18 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Water Flow Dashboard</title>
+    <title>Dashboard de Vazão de Água</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Merriweather:wght@700&display=swap" rel="stylesheet">
     <style>
         body {
             background-color: #e0f7fa;
             font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
         .navbar {
             background-color: #006064;
@@ -38,6 +41,7 @@
             color: white !important;
             font-size: 18px;
             padding: 10px 30px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
         }
         .nav-link:hover {
             text-decoration: none;
@@ -46,9 +50,9 @@
         }
         h1 {
             text-align: center;
-            margin-top: 20px;
+            margin: 40px 0; /* Ajuste da margem para centralizar o título */
             font-size: 3rem;
-            font-weight: 700;
+            font-family: 'Merriweather', serif;
             color: #004d40;
             animation: slideIn 2s ease;
         }
@@ -65,6 +69,17 @@
         .container {
             animation: fadeIn 2s;
             padding: 20px 0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
         }
         .card {
             background: white;
@@ -73,6 +88,13 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             margin: 20px 0;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            animation: fadeInCard 1s forwards;
+        }
+        @keyframes fadeInCard {
+            to {
+                opacity: 1;
+            }
         }
         .card:hover {
             transform: translateY(-10px);
@@ -81,40 +103,52 @@
         .card-title {
             font-size: 1.75rem;
             font-weight: 700;
+            font-family: 'Merriweather', serif;
             color: #006064;
         }
         .card-text {
             font-size: 1rem;
             color: #004d40;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
         .row {
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
+            flex-wrap: wrap;
         }
         .col-md-6 {
             flex: 0 0 50%;
             max-width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
         }
         img {
-            max-width: 100%;
+            max-width: 80%;
             height: auto;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .card-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            margin: 20px 0;
+            display: block;
+            border-radius: 0;
+            box-shadow: none;
         }
         @media (max-width: 768px) {
-            .row {
-                flex-direction: column;
+            .col-md-6 {
+                max-width: 90%;
             }
+        }
+        footer {
+            background-color: #006064;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        footer p {
+            margin: 0;
         }
     </style>
 </head>
@@ -126,43 +160,48 @@
         <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" href="/">Home</a>
+                    <a class="nav-link active" href="/">Início</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/static-plots">Static Plots</a>
+                    <a class="nav-link" href="/static-plots">Gráficos Estáticos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/forecasting-plots">Forecasting Plots</a>
+                    <a class="nav-link" href="/forecasting-plots">Gráficos de Previsão</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/model-performance">Model Performance</a>
+                    <a class="nav-link" href="/model-performance">Desempenho do Modelo</a>
                 </li>
             </ul>
         </div>
     </nav>
     <div class="container">
-        <h1>Bem vindo ao Elipse Water Dashboard</h1>
-        <div class="row">
-            <div class="col-md-6 card-container">
-                <div class="card">
-                    <h2 class="card-title">Static Plots</h2>
-                    <p class="card-text">Explore various static visualizations that illustrate the typical water flow patterns over different periods, including daily, weekly, and seasonal trends.</p>
+        <div class="content">
+            <h1>Bem-vindo ao Dashboard de Vazão de Água</h1>
+            <div class="row">
+                <div class="col-md-6 card-container">
+                    <div class="card">
+                        <h2 class="card-title">Gráficos Estáticos</h2>
+                        <p class="card-text">Explore várias visualizações estáticas que ilustram os padrões típicos de vazão de água em diferentes períodos, incluindo tendências diárias, semanais e sazonais.</p>
+                    </div>
+                    <div class="card">
+                        <h2 class="card-title">Gráficos de Previsão</h2>
+                        <p class="card-text">Veja previsões de vazão de água com base em diferentes modelos. Esses gráficos ajudam a prever tendências futuras e tomar decisões informadas.</p>
+                    </div>
+                    <div class="card">
+                        <h2 class="card-title">Desempenho do Modelo</h2>
+                        <p class="card-text">Analise o desempenho de diferentes modelos usados para prever a vazão de água. Compare precisão, eficiência e outras métricas.</p>
+                    </div>
                 </div>
-                <div class="card">
-                    <h2 class="card-title">Forecasting Plots</h2>
-                    <p class="card-text">View forecasts for water flow based on different models. These plots help in predicting future trends and making informed decisions.</p>
+                <div class="col-md-6">
+                    <img src="https://www.powersyslab.com/images/logo.svg" alt="Logo PowerSysLab">
+                    <img src="https://i.postimg.cc/vZdj757M/Logoelipse-removebg-preview.png" alt="Logo Elipse Software">
                 </div>
-                <div class="card">
-                    <h2 class="card-title">Model Performance</h2>
-                    <p class="card-text">Analyze the performance of different models used for forecasting water flow. Compare accuracy, efficiency, and other metrics.</p>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <img src="https://www.powersyslab.com/images/logo.svg" alt="Water Flow Image">
-                <img src="./app/templates/Logoelipse-removebg-preview.png">
             </div>
         </div>
     </div>
+    <footer>
+        <p>&copy; 2024 Elipse Software & PowerSysLab. Todos os direitos reservados.</p>
+    </footer>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
