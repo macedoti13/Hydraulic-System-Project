@@ -13,7 +13,7 @@ This README file provides detailed instructions on how to run the dashboard appl
 ## Project Structure
 
 The directory structure of the application is as follows:
-
+```
 app/
 │
 ├── data/
@@ -44,7 +44,7 @@ app/
 │
 ├── run.py
 └── README.md
-
+```
 
 ## Installation and Setup
 
