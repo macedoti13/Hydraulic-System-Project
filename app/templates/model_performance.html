@@ -85,6 +85,12 @@
     <div class="container">
         <h1>Desempenho dos Modelos</h1>
         <!-- Add your static plot code here -->
+        <div>
+            {{ plot_html | safe }}
+        </div>
+        <div>
+            {{ plot_2_html | safe }}
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

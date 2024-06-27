@@ -17,11 +17,13 @@ from functions.plots.questions_4_and_7_plots import create_questions_4_and_7_plo
 from functions.plots.question_5_plots import create_question_5_plot
 from functions.plots.question_6_plots import generate_question_6_plots
 from functions.plots.question_8_plot import plot_pump_schedule
+from functions.plots.model_evaluation_plots import plot_comparison_no_weather, plot_comparison_with_weather
 
 # load datasets
 water_consumption_silver = pd.read_parquet(os.path.join(os.path.dirname(__file__), "../data/silver/water_consumption_silver.parquet"))
 question_2_dataset = pd.read_parquet(os.path.join(os.path.dirname(__file__), "../data/gold/question_2_answer.parquet"))
 question_3_dataset = pd.read_parquet(os.path.join(os.path.dirname(__file__), "../data/gold/question_3_answer.parquet"))
+evaluation_dataset = pd.read_parquet(os.path.join(os.path.dirname(__file__), "../data/gold/model_prediction_evaluation.parquet"))
 
 # app 
 app = Flask(__name__)
@@ -90,7 +92,11 @@ def forecasting_plots():
 
 @app.route('/model-performance')
 def model_performance():
-    return render_template('model_performance.html')
+    
+    plot_1 = plot_comparison_no_weather(evaluation_dataset)
+    plot_2 = plot_comparison_with_weather(evaluation_dataset)
+    
+    return render_template('model_performance.html', plot_html=plot_1, plot_2_html=plot_2)
 
 def main():
     app.run(host='0.0.0.0', port=3000, debug=True)
