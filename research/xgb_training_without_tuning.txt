@@ -1,0 +1,505 @@
+(pcd) ➜  final_final git:(main) ✗ python -B scripts/model_training/xgb_1.py                 
+
+Training model! with_weather: True
+[0]     validation_0-mae:5.09679        validation_1-mae:4.98459
+[99]    validation_0-mae:1.18367        validation_1-mae:8.08876
+
+Training model! with_weather: False
+[0]     validation_0-mae:5.09557        validation_1-mae:4.98826
+[99]    validation_0-mae:1.07714        validation_1-mae:6.66634
+
+With weather:
+Mean Absolute Error: 8.09
+Mean Squared Error: 119.93
+Root Mean Squared Error: 10.95
+R2 Score: -0.88
+
+Without weather:
+Mean Absolute Error: 6.67
+Mean Squared Error: 84.48
+Root Mean Squared Error: 9.19
+R2 Score: -0.33
+(pcd) ➜  final_final git:(main) ✗ python -B scripts/model_training/xgb_2.py
+
+Training model! with_weather: True
+[0]     validation_0-mae:5.22904        validation_1-mae:5.08343
+[99]    validation_0-mae:1.43815        validation_1-mae:8.76385
+
+Training model! with_weather: False
+[0]     validation_0-mae:5.24605        validation_1-mae:4.84154
+[99]    validation_0-mae:1.33334        validation_1-mae:6.90594
+
+With weather:
+Mean Absolute Error: 8.96
+Mean Squared Error: 146.33
+Root Mean Squared Error: 12.1
+R2 Score: -1.3
+
+Without weather:
+Mean Absolute Error: 7.21
+Mean Squared Error: 100.17
+Root Mean Squared Error: 10.01
+R2 Score: -0.57
+(pcd) ➜  final_final git:(main) ✗ python -B scripts/model_training/xgb_3.py
+
+Training model! with_weather: True
+[0]     validation_0-mae:5.32614        validation_1-mae:4.89165
+[99]    validation_0-mae:1.54605        validation_1-mae:7.60606
+
+Training model! with_weather: False
+[0]     validation_0-mae:5.32893        validation_1-mae:5.07111
+[99]    validation_0-mae:1.48313        validation_1-mae:7.34628
+
+With weather:
+Mean Absolute Error: 7.96
+Mean Squared Error: 121.56
+Root Mean Squared Error: 11.03
+R2 Score: -0.91
+
+Without weather:
+Mean Absolute Error: 7.41
+Mean Squared Error: 108.56
+Root Mean Squared Error: 10.42
+R2 Score: -0.7
+(pcd) ➜  final_final git:(main) ✗ python -B scripts/model_training/xgb_4.py
+
+Training model! with_weather: True
+[0]     validation_0-mae:5.26869        validation_1-mae:4.89202
+[99]    validation_0-mae:1.65819        validation_1-mae:7.31352
+
+Training model! with_weather: False
+[0]     validation_0-mae:5.28140        validation_1-mae:4.82188
+[99]    validation_0-mae:1.61237        validation_1-mae:6.95157
+
+With weather:
+Mean Absolute Error: 7.61
+Mean Squared Error: 113.61
+Root Mean Squared Error: 10.66
+R2 Score: -0.78
+
+Without weather:
+Mean Absolute Error: 7.07
+Mean Squared Error: 99.36
+Root Mean Squared Error: 9.97
+R2 Score: -0.56
+(pcd) ➜  final_final git:(main) ✗ python -B scripts/model_training/xgb_5.py
+
+Training model! with_weather: True
+[0]     validation_0-mae:5.28939        validation_1-mae:5.10640
+[99]    validation_0-mae:1.74707        validation_1-mae:12.78150
+
+Training model! with_weather: False
+[0]     validation_0-mae:5.28696        validation_1-mae:4.78943
+[99]    validation_0-mae:1.70771        validation_1-mae:6.71137
+
+With weather:
+Mean Absolute Error: 12.79
+Mean Squared Error: 371.5
+Root Mean Squared Error: 19.27
+R2 Score: -4.83
+
+Without weather:
+Mean Absolute Error: 6.77
+Mean Squared Error: 94.02
+Root Mean Squared Error: 9.7
+R2 Score: -0.48
+(pcd) ➜  final_final git:(main) ✗ python -B scripts/model_training/xgb_6.py
+
+Training model! with_weather: True
+[0]     validation_0-mae:5.29383        validation_1-mae:4.93101
+[99]    validation_0-mae:1.65382        validation_1-mae:9.76855
+
+Training model! with_weather: False
+[0]     validation_0-mae:5.28535        validation_1-mae:4.89238
+[99]    validation_0-mae:1.57188        validation_1-mae:7.33130
+
+With weather:
+Mean Absolute Error: 9.86
+Mean Squared Error: 191.0
+Root Mean Squared Error: 13.82
+R2 Score: -2.0
+
+Without weather:
+Mean Absolute Error: 7.44
+Mean Squared Error: 108.81
+Root Mean Squared Error: 10.43
+R2 Score: -0.71
+(pcd) ➜  final_final git:(main) ✗ python -B scripts/model_training/xgb_7.py
+
+Training model! with_weather: True
+[0]     validation_0-mae:5.31241        validation_1-mae:4.83710
+[99]    validation_0-mae:1.77548        validation_1-mae:6.96653
+
+Training model! with_weather: False
+[0]     validation_0-mae:5.31062        validation_1-mae:4.85176
+[99]    validation_0-mae:1.67013        validation_1-mae:6.77409
+
+With weather:
+Mean Absolute Error: 7.07
+Mean Squared Error: 104.14
+Root Mean Squared Error: 10.2
+R2 Score: -0.63
+
+Without weather:
+Mean Absolute Error: 6.91
+Mean Squared Error: 97.47
+Root Mean Squared Error: 9.87
+R2 Score: -0.53
+(pcd) ➜  final_final git:(main) ✗ python -B scripts/model_training/xgb_8.py
+
+Training model! with_weather: True
+[0]     validation_0-mae:5.31664        validation_1-mae:4.88089
+[99]    validation_0-mae:1.63862        validation_1-mae:7.54359
+
+Training model! with_weather: False
+[0]     validation_0-mae:5.27968        validation_1-mae:4.79879
+[99]    validation_0-mae:1.62429        validation_1-mae:8.02272
+
+With weather:
+Mean Absolute Error: 7.72
+Mean Squared Error: 115.79
+Root Mean Squared Error: 10.76
+R2 Score: -0.82
+
+Without weather:
+Mean Absolute Error: 8.09
+Mean Squared Error: 120.23
+Root Mean Squared Error: 10.96
+R2 Score: -0.89
+(pcd) ➜  final_final git:(main) ✗ python -B scripts/model_training/xgb_9.py
+
+Training model! with_weather: True
+[0]     validation_0-mae:5.29697        validation_1-mae:4.88394
+[99]    validation_0-mae:1.70886        validation_1-mae:7.14550
+
+Training model! with_weather: False
+[0]     validation_0-mae:5.30965        validation_1-mae:4.87179
+[99]    validation_0-mae:1.62870        validation_1-mae:6.95521
+
+With weather:
+Mean Absolute Error: 7.43
+Mean Squared Error: 105.84
+Root Mean Squared Error: 10.29
+R2 Score: -0.66
+
+Without weather:
+Mean Absolute Error: 7.05
+Mean Squared Error: 97.04
+Root Mean Squared Error: 9.85
+R2 Score: -0.52
+(pcd) ➜  final_final git:(main) ✗ python -B scripts/model_training/xgb_10.py
+
+Training model! with_weather: True
+[0]     validation_0-mae:5.27946        validation_1-mae:4.89219
+[99]    validation_0-mae:1.54044        validation_1-mae:7.83366
+
+Training model! with_weather: False
+[0]     validation_0-mae:5.28498        validation_1-mae:4.85693
+[99]    validation_0-mae:1.52362        validation_1-mae:7.17112
+
+With weather:
+Mean Absolute Error: 8.17
+Mean Squared Error: 125.37
+Root Mean Squared Error: 11.2
+R2 Score: -0.97
+
+Without weather:
+Mean Absolute Error: 7.43
+Mean Squared Error: 106.86
+Root Mean Squared Error: 10.34
+R2 Score: -0.68
+(pcd) ➜  final_final git:(main) ✗ python -B scripts/model_training/xgb_11.py
+
+Training model! with_weather: True
+[0]     validation_0-mae:5.30851        validation_1-mae:4.81025
+[99]    validation_0-mae:1.59753        validation_1-mae:7.66748
+
+Training model! with_weather: False
+[0]     validation_0-mae:5.30300        validation_1-mae:4.80737
+[99]    validation_0-mae:1.68819        validation_1-mae:6.72287
+
+With weather:
+Mean Absolute Error: 7.69
+Mean Squared Error: 112.61
+Root Mean Squared Error: 10.61
+R2 Score: -0.77
+
+Without weather:
+Mean Absolute Error: 6.93
+Mean Squared Error: 97.52
+Root Mean Squared Error: 9.88
+R2 Score: -0.53
+(pcd) ➜  final_final git:(main) ✗ python -B scripts/model_training/xgb_12.py
+
+Training model! with_weather: True
+[0]     validation_0-mae:5.29279        validation_1-mae:5.20114
+[99]    validation_0-mae:1.60547        validation_1-mae:7.72582
+
+Training model! with_weather: False
+[0]     validation_0-mae:5.27486        validation_1-mae:5.20727
+[99]    validation_0-mae:1.57287        validation_1-mae:6.91653
+
+With weather:
+Mean Absolute Error: 7.71
+Mean Squared Error: 113.56
+Root Mean Squared Error: 10.66
+R2 Score: -0.78
+
+Without weather:
+Mean Absolute Error: 7.15
+Mean Squared Error: 101.48
+Root Mean Squared Error: 10.07
+R2 Score: -0.59
+(pcd) ➜  final_final git:(main) ✗ python -B scripts/model_training/xgb_13.py
+
+Training model! with_weather: True
+[0]     validation_0-mae:5.24909        validation_1-mae:4.84079
+[99]    validation_0-mae:1.80681        validation_1-mae:7.97762
+
+Training model! with_weather: False
+[0]     validation_0-mae:5.24642        validation_1-mae:4.83776
+[99]    validation_0-mae:1.64360        validation_1-mae:6.78553
+
+With weather:
+Mean Absolute Error: 8.53
+Mean Squared Error: 137.5
+Root Mean Squared Error: 11.73
+R2 Score: -1.16
+
+Without weather:
+Mean Absolute Error: 7.04
+Mean Squared Error: 101.29
+Root Mean Squared Error: 10.06
+R2 Score: -0.59
+(pcd) ➜  final_final git:(main) ✗ python -B scripts/model_training/xgb_14.py
+
+Training model! with_weather: True
+[0]     validation_0-mae:5.28543        validation_1-mae:4.79936
+[99]    validation_0-mae:1.79101        validation_1-mae:7.57491
+
+Training model! with_weather: False
+[0]     validation_0-mae:5.28989        validation_1-mae:4.80037
+[99]    validation_0-mae:1.65374        validation_1-mae:6.48314
+
+With weather:
+Mean Absolute Error: 7.84
+Mean Squared Error: 119.67
+Root Mean Squared Error: 10.94
+R2 Score: -0.88
+
+Without weather:
+Mean Absolute Error: 6.75
+Mean Squared Error: 95.35
+Root Mean Squared Error: 9.76
+R2 Score: -0.5
+(pcd) ➜  final_final git:(main) ✗ python -B scripts/model_training/xgb_15.py
+
+Training model! with_weather: True
+[0]     validation_0-mae:5.25493        validation_1-mae:4.80313
+[99]    validation_0-mae:1.63479        validation_1-mae:7.33387
+
+Training model! with_weather: False
+[0]     validation_0-mae:5.24827        validation_1-mae:4.81591
+[99]    validation_0-mae:1.72780        validation_1-mae:7.07560
+
+With weather:
+Mean Absolute Error: 7.56
+Mean Squared Error: 113.77
+Root Mean Squared Error: 10.67
+R2 Score: -0.79
+
+Without weather:
+Mean Absolute Error: 7.42
+Mean Squared Error: 111.31
+Root Mean Squared Error: 10.55
+R2 Score: -0.75
+(pcd) ➜  final_final git:(main) ✗ python -B scripts/model_training/xgb_16.py
+
+Training model! with_weather: True
+[0]     validation_0-mae:5.29191        validation_1-mae:4.89166
+[99]    validation_0-mae:1.75081        validation_1-mae:7.54241
+
+Training model! with_weather: False
+[0]     validation_0-mae:5.28986        validation_1-mae:4.88062
+[99]    validation_0-mae:1.68015        validation_1-mae:7.16850
+
+With weather:
+Mean Absolute Error: 7.77
+Mean Squared Error: 116.76
+Root Mean Squared Error: 10.81
+R2 Score: -0.83
+
+Without weather:
+Mean Absolute Error: 7.7
+Mean Squared Error: 116.48
+Root Mean Squared Error: 10.79
+R2 Score: -0.83
+(pcd) ➜  final_final git:(main) ✗ python -B scripts/model_training/xgb_17.py
+
+Training model! with_weather: True
+[0]     validation_0-mae:5.30315        validation_1-mae:4.83656
+[99]    validation_0-mae:1.83674        validation_1-mae:7.80131
+
+Training model! with_weather: False
+[0]     validation_0-mae:5.31510        validation_1-mae:4.82982
+[99]    validation_0-mae:1.86479        validation_1-mae:7.21385
+
+With weather:
+Mean Absolute Error: 8.22
+Mean Squared Error: 124.4
+Root Mean Squared Error: 11.15
+R2 Score: -0.95
+
+Without weather:
+Mean Absolute Error: 7.17
+Mean Squared Error: 104.83
+Root Mean Squared Error: 10.24
+R2 Score: -0.64
+(pcd) ➜  final_final git:(main) ✗ python -B scripts/model_training/xgb_18.py
+
+Training model! with_weather: True
+[0]     validation_0-mae:5.27885        validation_1-mae:4.87433
+[99]    validation_0-mae:1.76428        validation_1-mae:7.51168
+
+Training model! with_weather: False
+[0]     validation_0-mae:5.27236        validation_1-mae:4.81151
+[99]    validation_0-mae:1.66616        validation_1-mae:6.69901
+
+With weather:
+Mean Absolute Error: 7.64
+Mean Squared Error: 115.08
+Root Mean Squared Error: 10.73
+R2 Score: -0.81
+
+Without weather:
+Mean Absolute Error: 6.74
+Mean Squared Error: 94.95
+Root Mean Squared Error: 9.74
+R2 Score: -0.49
+(pcd) ➜  final_final git:(main) ✗ python -B scripts/model_training/xgb_19.py
+
+Training model! with_weather: True
+[0]     validation_0-mae:5.31385        validation_1-mae:4.89873
+[99]    validation_0-mae:1.80477        validation_1-mae:6.88892
+
+Training model! with_weather: False
+[0]     validation_0-mae:5.31744        validation_1-mae:4.86306
+[99]    validation_0-mae:1.67307        validation_1-mae:7.08848
+
+With weather:
+Mean Absolute Error: 7.13
+Mean Squared Error: 101.19
+Root Mean Squared Error: 10.06
+R2 Score: -0.59
+
+Without weather:
+Mean Absolute Error: 7.01
+Mean Squared Error: 99.99
+Root Mean Squared Error: 10.0
+R2 Score: -0.57
+(pcd) ➜  final_final git:(main) ✗ python -B scripts/model_training/xgb_20.py
+
+Training model! with_weather: True
+[0]     validation_0-mae:5.32083        validation_1-mae:4.83103
+[99]    validation_0-mae:1.80500        validation_1-mae:8.97720
+
+Training model! with_weather: False
+[0]     validation_0-mae:5.32832        validation_1-mae:4.82149
+[99]    validation_0-mae:1.65107        validation_1-mae:7.28103
+
+With weather:
+Mean Absolute Error: 8.97
+Mean Squared Error: 154.01
+Root Mean Squared Error: 12.41
+R2 Score: -1.42
+
+Without weather:
+Mean Absolute Error: 7.47
+Mean Squared Error: 113.74
+Root Mean Squared Error: 10.66
+R2 Score: -0.78
+(pcd) ➜  final_final git:(main) ✗ python -B scripts/model_training/xgb_21.py
+
+Training model! with_weather: True
+[0]     validation_0-mae:5.31260        validation_1-mae:4.81381
+[99]    validation_0-mae:1.79586        validation_1-mae:9.82500
+
+Training model! with_weather: False
+[0]     validation_0-mae:5.30632        validation_1-mae:4.77379
+[99]    validation_0-mae:1.63309        validation_1-mae:6.55516
+
+With weather:
+Mean Absolute Error: 9.94
+Mean Squared Error: 197.98
+Root Mean Squared Error: 14.07
+R2 Score: -2.11
+
+Without weather:
+Mean Absolute Error: 6.88
+Mean Squared Error: 96.11
+Root Mean Squared Error: 9.8
+R2 Score: -0.51
+(pcd) ➜  final_final git:(main) ✗ python -B scripts/model_training/xgb_22.py
+
+Training model! with_weather: True
+[0]     validation_0-mae:5.31273        validation_1-mae:4.86842
+[99]    validation_0-mae:1.81904        validation_1-mae:11.15221
+
+Training model! with_weather: False
+[0]     validation_0-mae:5.29279        validation_1-mae:4.84339
+[99]    validation_0-mae:1.59960        validation_1-mae:6.65325
+
+With weather:
+Mean Absolute Error: 11.09
+Mean Squared Error: 275.9
+Root Mean Squared Error: 16.61
+R2 Score: -3.33
+
+Without weather:
+Mean Absolute Error: 6.72
+Mean Squared Error: 93.28
+Root Mean Squared Error: 9.66
+R2 Score: -0.46
+(pcd) ➜  final_final git:(main) ✗ python -B scripts/model_training/xgb_23.py
+
+Training model! with_weather: True
+[0]     validation_0-mae:5.29369        validation_1-mae:4.88019
+[99]    validation_0-mae:1.75237        validation_1-mae:7.51507
+
+Training model! with_weather: False
+[0]     validation_0-mae:5.28490        validation_1-mae:4.90373
+[99]    validation_0-mae:1.71361        validation_1-mae:8.11716
+
+With weather:
+Mean Absolute Error: 7.32
+Mean Squared Error: 106.06
+Root Mean Squared Error: 10.3
+R2 Score: -0.66
+
+Without weather:
+Mean Absolute Error: 8.12
+Mean Squared Error: 122.54
+Root Mean Squared Error: 11.07
+R2 Score: -0.92
+(pcd) ➜  final_final git:(main) ✗ python -B scripts/model_training/xgb_24.py
+
+Training model! with_weather: True
+[0]     validation_0-mae:5.25225        validation_1-mae:4.83686
+[99]    validation_0-mae:1.76575        validation_1-mae:7.53586
+
+Training model! with_weather: False
+[0]     validation_0-mae:5.25940        validation_1-mae:4.83400
+[99]    validation_0-mae:1.57326        validation_1-mae:7.27514
+
+With weather:
+Mean Absolute Error: 7.43
+Mean Squared Error: 106.43
+Root Mean Squared Error: 10.32
+R2 Score: -0.67
+
+Without weather:
+Mean Absolute Error: 7.36
+Mean Squared Error: 105.48
+Root Mean Squared Error: 10.27
+R2 Score: -0.66
+(pcd) ➜  final_final git:(main) ✗ 

@@ -1,83 +1,99 @@
 from flask import Flask, render_template, request
 import pandas as pd
-import pickle
 import sys
 import os
 
-# Construct the absolute path to the dataset
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+# functions to generate the data used by the plots
+from functions.answer_questions.answer_questions_4_and_7 import forecast_next_24_hours_output_flow_rate
+from functions.answer_questions.answer_question_5 import simulate_emptying_reservoir
+from functions.answer_questions.answer_question_8 import find_best_pump_schedule
+
+# functions to generate the plots
+from functions.plots.question_2_plots import generate_question_2_plot_1, generate_question_2_plot_2
+from functions.plots.question_3_plots import generate_question_3_plot_1, generate_question_3_plot_2
+from functions.plots.questions_4_and_7_plots import create_questions_4_and_7_plot_1
+from functions.plots.question_5_plots import create_question_5_plot
+from functions.plots.question_6_plots import generate_question_6_plots
+from functions.plots.question_8_plot import plot_pump_schedule
 
 # load datasets
-water_consumption = pd.read_parquet(os.path.join(BASE_DIR, 'data', 'curated_datasets', 'water_consumption_curated.parquet'))
-forecasting_dataset = pd.read_parquet(os.path.join(BASE_DIR, 'data', 'curated_datasets', 'forecasting_dataset.parquet'))
-question_2_dataset = pd.read_parquet(os.path.join(BASE_DIR, 'data', 'questions_datasets', 'question_2_dataset.parquet'))
-question_3_dataset = pd.read_parquet(os.path.join(BASE_DIR, 'data', 'questions_datasets', 'question_3_dataset.parquet'))
+water_consumption_silver = pd.read_parquet(os.path.join(os.path.dirname(__file__), "../data/silver/water_consumption_silver.parquet"))
+question_2_dataset = pd.read_parquet(os.path.join(os.path.dirname(__file__), "../data/gold/question_2_answer.parquet"))
+question_3_dataset = pd.read_parquet(os.path.join(os.path.dirname(__file__), "../data/gold/question_3_answer.parquet"))
 
-# load forecasters
-output_flow_forecaster = pickle.load(open(os.path.join(BASE_DIR, 'models', 'forecaster.pkl'), 'rb'))
-output_flow_forecaster_with_weather = pickle.load(open(os.path.join(BASE_DIR, 'models', 'forecaster_with_weather.pkl'), 'rb'))
-input_flow_forecaster = pickle.load(open(os.path.join(BASE_DIR, 'models', 'input_flow_forecaster.pkl'), 'rb'))
-
-# import from the utils module here
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from utils.scripts.functions.main_functions import simulate_emptying, forecast_next_24_hours_output_flow_rate
-from app.plots_functions.static_plots import generate_question_2_plot_1, generate_question_2_plot_2, generate_question_3_plot_1, generate_question_3_plot_2, generate_question_6_plots
-from app.plots_functions.forecasting_plots import create_question_4_plot, create_question_5_plot
-
-
-# generate app
+# app 
 app = Flask(__name__)
 
-# Route for the homepage
 @app.route('/')
 def index():
     return render_template('index.html')
 
-# Route for the static plots page
 @app.route('/static-plots')
 def static_plots():
-    # Generate the plots that will be displayed on the static plots page
-    question_1_plot = generate_question_2_plot_1(question_2_dataset)
-    question_2_plot = generate_question_2_plot_2(question_2_dataset)
-    question_3_plot = generate_question_3_plot_1(question_3_dataset)  
-    question_4_plot = generate_question_3_plot_2(question_3_dataset)  
-    question_6_plot_1, question_6_plot_2, question_6_plot_3 = generate_question_6_plots(water_consumption.iloc[10000:25000])
+    
+    # question 2 plots
+    question_2_plot_1 = generate_question_2_plot_1(question_2_dataset)
+    question_2_plot_2 = generate_question_2_plot_2(question_2_dataset)
+    
+    # question 3 plots
+    question_3_plot_1 = generate_question_3_plot_1(question_3_dataset)
+    question_3_plot_2 = generate_question_3_plot_2(question_3_dataset)
+    
+    # question 6 plots
+    question_6_plot_1, question_6_plot_2, question_6_plot_3 = generate_question_6_plots(water_consumption_silver)
+    
+    # render template
+    return render_template(
+        'static_plots.html',
+        plot_html=question_2_plot_1,
+        plot_2_html=question_2_plot_2,
+        plot_3_html=question_3_plot_1,
+        plot_4_html=question_3_plot_2,
+        plot_5_html=question_6_plot_1,
+        plot_6_html=question_6_plot_2,
+        plot_7_html=question_6_plot_3
+    )
 
-    return render_template('static_plots.html', plot_html=question_1_plot, plot_2_html=question_2_plot, plot_3_html=question_3_plot, plot_4_html=question_4_plot, plot_5_html=question_6_plot_1, plot_6_html=question_6_plot_2, plot_7_html=question_6_plot_3)
-
-# Route for the forecasting plots page
 @app.route('/forecasting-plots', methods=['GET', 'POST'])
 def forecasting_plots():
-    if request.method == 'POST':
+    
+    # wait user input
+    if request.method == "POST":
         year = int(request.form['year'])
         month = int(request.form['month'])
         day = int(request.form['day'])
         hour = int(request.form['hour'])
-        minute = int(request.form['minute'])
-
-        # create all dataframes that require the user input
-        _, output_flow_24_hour_forecast_question_2_dataset = forecast_next_24_hours_output_flow_rate(water_consumption, output_flow_forecaster, input_flow_forecaster, year, month, day, hour, minute, False)
-        _, output_flow_24_hour_forecast_with_weather_question_2_dataset = forecast_next_24_hours_output_flow_rate(water_consumption, output_flow_forecaster_with_weather, input_flow_forecaster, year, month, day, hour, minute, True)
-        emptying_simulation_question_2_dataset, time_until_emptying = simulate_emptying(water_consumption, output_flow_forecaster, input_flow_forecaster, year, month, day, hour, minute, False)
         
-        # TO DO: create dataframe for pump status optimization here (not yet implemented in the utils module)
-
-        # create the plots that will be displayed on the forecasting plots page here
-        question_4_plot = create_question_4_plot(output_flow_24_hour_forecast_question_2_dataset[['hour', 'output_flow_rate', 'forecasted']])
-        question_7_plot = create_question_4_plot(output_flow_24_hour_forecast_with_weather_question_2_dataset[['hour', 'output_flow_rate', 'forecasted']])
-        question_5_plot = create_question_5_plot(emptying_simulation_question_2_dataset)
+        # generate the data from the user input
+        output_flow_prediction_dataset = forecast_next_24_hours_output_flow_rate(year, month, day, hour, save_df=False)
+        simulation_dataset, _ = simulate_emptying_reservoir(year, month, day, hour, save_df=False)
+        best_schedule, best_reward = find_best_pump_schedule(year, month, day, hour)
         
-        return render_template('forecasting_plots.html', plot_q4=question_4_plot, plot_q7=question_7_plot, plot_q5=question_5_plot)
-    
+        # forecast the next 24 hours output flow rate and simulate the emptying of the reservoir
+        question_4_and_7_plot_1 = create_questions_4_and_7_plot_1(output_flow_prediction_dataset)
+        question_5_plot = create_question_5_plot(simulation_dataset)
+        question_8_plot = plot_pump_schedule(best_schedule)
+        
+        # render template with the plots
+        return render_template(
+            'forecasting_plots.html',
+            plot_html=question_4_and_7_plot_1,
+            plot_2_html=question_5_plot,
+            plot_3_html=question_8_plot
+        )
+        
+    # render the template with the form to get the user input
     return render_template('forecasting_plots.html')
+        
 
-# Route for the model performance page
 @app.route('/model-performance')
 def model_performance():
     return render_template('model_performance.html')
 
 def main():
     app.run(host='0.0.0.0', port=3000, debug=True)
-
-if __name__ == '__main__':
-    main()
+    
+if __name__ == "__main__":
+    main() 
